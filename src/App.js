@@ -23,7 +23,7 @@ function App() {
           <Route path="/user" element={<CreateUser />} />
         </Routes>
       </div>
-      </Router>
+    </Router>
   );
 }
 
