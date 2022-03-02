@@ -1,6 +1,9 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
+import axios from 'axios'
 
-function ExercisesList() {
+const ExercisesList = () => {
+  
   return (
     <div>
         <p>You are on the Exercises List component!</p>

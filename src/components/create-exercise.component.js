@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import axios from 'axios'
 import DatePicker from 'react-date-picker'
 import "react-datepicker/dist/react-datepicker.css"
 
@@ -53,6 +54,16 @@ const CreateExercise = () => {
   //     date: date
   //   });
   // }
+  useEffect(() => {
+    axios.get('http://localhost:5000/users/')
+    .then(response => {
+      if (response.data.length > 0) {
+        setUsers(response.data.map(user => user.username))
+        setUsername(response.data[0].username)
+      }
+    })
+    
+  }, [])
   const onSubmit = (e) => {
     e.preventDefault();
     const exercise = {
@@ -62,6 +73,8 @@ const CreateExercise = () => {
       date: date
     }
     console.log(exercise);
+    axios.post('http://localhost:5000/exercises/add', exercise)
+    .then(res => console.log(res.data))
     window.location = '/';
   }
   
@@ -76,7 +89,7 @@ const CreateExercise = () => {
             <label>Username: </label>
             <select ref={selectRef}
               required
-              className="form-control"
+              className="form-select"
               value={username}
               onChange={(e) => setUsername(e.target.value)}>
               {
@@ -119,7 +132,7 @@ const CreateExercise = () => {
           </div>
 
           <div className="form-group">
-            <input type="submit" value="Create Exercise Log" className="btn btn-primary" />
+            <input type="submit" value="Create Exercise Log" className="btn btn-primary mt-2" />
           </div>
         </form>
       </div>
