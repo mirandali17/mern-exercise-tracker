@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import DatePicker from 'react-date-picker'
-import "react-datepicker/dist/react-datepicker.css"
 
 const CreateExercise = () => {
   const [username, setUsername] = useState('test user')
@@ -10,50 +9,7 @@ const CreateExercise = () => {
   const [date, setDate] = useState(new Date())
   const [users, setUsers] = useState(['test user'])
 
-  // constructor(props) {
-  //   super(props);
-  //   this.onChangeUsername = this.onChangeUsername.bind(this);
-  //   this.onChangeDescription = this.onChangeDescription.bind(this);
-  //   this.onChangeDuration = this.onChangeDuration.bind(this);
-  //   this.onChangeDate = this.onChangeDate.bind(this);
-  //   this.onSubmite = this.onSubmite.bind(this);
-
-  //   this.state = {
-  //     username: '',
-  //     description: '',
-  //     duration: 0,
-  //     date: new Date(),
-  //     users: []
-  //   }
-  // }
-
-  // componentDidMount() {
-  //   this.setState({
-  //     users: ['test user'],
-  //     username: 'test user'
-  //   })
-  // }
-
-  // onChangeUsername(e) {
-  //   this.setState({
-  //     username: e.target.value
-  //   });
-  // }
-  // onChangeDescription(e) {
-  //   this.setState({
-  //     description: e.target.value
-  //   });
-  // }
-  // onChangeDuration(e) {
-  //   this.setState({
-  //     duration: e.target.value
-  //   });
-  // }
-  // onChangeDate(date) {
-  //   this.setState({
-  //     date: date
-  //   });
-  // }
+ 
   useEffect(() => {
     axios.get('http://localhost:5000/users/')
     .then(response => {
@@ -61,9 +17,9 @@ const CreateExercise = () => {
         setUsers(response.data.map(user => user.username))
         setUsername(response.data[0].username)
       }
-    })
-    
+    }) 
   }, [])
+
   const onSubmit = (e) => {
     e.preventDefault();
     const exercise = {
@@ -137,7 +93,6 @@ const CreateExercise = () => {
         </form>
       </div>
     )
-  
 }
 
 export default CreateExercise;
